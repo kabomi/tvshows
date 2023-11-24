@@ -1,0 +1,22 @@
+Features:
+  ☐ A Dashboard 
+    ☐ A few lists (horizontal) of TV shows of the different genres
+        ☐ A list per genre (drama, comed, sports, etc)
+    ☐ Each list with a few popular TV shows based on their rating (order by)
+        ☐ Let’s say the last 5/10 items (configurable)
+        ☐ When clicked on a TV show  it navigates to a detail view.
+    ☐ The user is able to search for a TV show to get the details.
+☐ Free to include other features:
+    ☐ Page Not Found
+
+Tech and functional requirements:
+☐ Angular and Ionic
+☐ Application must be responsive and mobile friendly
+☐ Don’t use lot of scaffolding tools, plugins, etc
+☐ README file that documents architectural decisions 
+    ☐ How to run & other details (nodes version & npm used)
+    - Node v18.18.2
+    - Nem v9.8.1
+☐ Include unit tests
+☐ Check app runs and there is no console errors
+☐ My own UI requirements
