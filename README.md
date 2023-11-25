@@ -9,6 +9,7 @@ TV shows data is served by the following open API: http://www.tvmaze.com/api
 ## Getting Started
 
 ### General Info
+- This app was created using: `ionic start tvShowsApp`. Choosing Angular Standalone Components and a Blank template
 
 ### Starting the application
 
