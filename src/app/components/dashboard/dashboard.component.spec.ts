@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
 
 import { DashboardComponent } from './dashboard.component';
 import { By } from '@angular/platform-browser';
 import { Component, Input } from '@angular/core';
 import { TvShow } from 'src/app/services/tvshows.model';
+import { dragonMovie, flockerMovie, harryPotterMovie, lastActionMovie } from 'src/app/services/tvshows.mocks';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -56,26 +56,6 @@ describe('DashboardComponent', () => {
 
   it('should list the shows of each genre limiting its number to showsLimitPerGenre value', () => {
     const genres = ['Drama', 'Action'];
-    const harryPotterMovie = {
-      name: 'Harry Potter',
-      rating: { average: 5.3 },
-      genres: ['Drama', 'Thriller', 'Science-Fiction'],
-    } as TvShow;
-    const flockerMovie = {
-      name: 'Flocker',
-      rating: { average: 9.3 },
-      genres: ['Crime', 'Action'],
-    } as TvShow;
-    const dragonMovie = {
-      name: 'Dragon',
-      rating: { average: 6.3 },
-      genres: ['Drama', 'Action'],
-    } as TvShow;
-    const lastActionMovie = {
-      name: 'Last Action Hero',
-      rating: { average: 7.3 },
-      genres: ['Action'],
-    } as TvShow;
     const tvShowsByGenre = new Map<string, TvShow[]>();
     tvShowsByGenre.set('Drama', [harryPotterMovie, dragonMovie]);
     tvShowsByGenre.set('Thriller', [harryPotterMovie]);
@@ -84,17 +64,19 @@ describe('DashboardComponent', () => {
     tvShowsByGenre.set('Action', [flockerMovie, dragonMovie, lastActionMovie]);
     const hostFixture = TestBed.createComponent(TestHostComponent);
     const hostComponent = hostFixture.componentInstance;
+
     hostComponent.genres = genres;
-    hostFixture.detectChanges();
     hostComponent.tvShowsByGenre = tvShowsByGenre;
-    hostFixture.detectChanges();
     hostComponent.showsPerGenreLimit = 2;
     hostFixture.detectChanges();
+
     const rowElements = hostFixture.debugElement.queryAll(By.css('.dashboard-genre-row'));
 
+    // Drama columns
     const columnsFirstRowElements = rowElements[0].queryAll(By.css('.dashboard-genre-column'));
     expect(columnsFirstRowElements).toHaveSize(hostComponent.showsPerGenreLimit);
 
+    // Action columns
     const columnsSecondRowElements = rowElements[1].queryAll(By.css('.dashboard-genre-column'));
     expect(columnsSecondRowElements).toHaveSize(hostComponent.showsPerGenreLimit);
   });

@@ -8,11 +8,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TvShowOptions } from '../services/tvshows.options';
 import { TvShow } from '../services/tvshows.model';
 import { of } from 'rxjs';
+import { dragonMovie, flockerMovie, harryPotterMovie } from '../services/tvshows.mocks';
 
 describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
-  let mockedTvShows: TvShow[];
   let apiOptions: TvShowOptions;
   let tvShowsService: TvshowsService;
 
@@ -30,21 +30,6 @@ describe('HomePage', () => {
       ],
     });
     tvShowsService = TestBed.inject(TvshowsService);
-    const harryPotterMovie = {
-      name: 'Harry Potter',
-      rating: { average: 5.3 },
-      genres: ['Drama', 'Thriller', 'Science-Fiction'],
-    } as TvShow;
-    const flockerMovie = {
-      name: 'Flocker',
-      rating: { average: 9.3 },
-      genres: ['Crime', 'Action'],
-    } as TvShow;
-    const dragonMovie = {
-      name: 'Dragon',
-      rating: { average: 6.3 },
-      genres: ['Drama', 'Action'],
-    } as TvShow;
     spyOnProperty(tvShowsService, 'tvShows$', 'get').and.returnValue(
       of([harryPotterMovie, flockerMovie, dragonMovie] as TvShow[]),
     );

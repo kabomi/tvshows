@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { TvshowsService } from './tvshows.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TvShow } from './tvshows.model';
+import { dragonMovie, flockerMovie, harryPotterMovie } from './tvshows.mocks';
 
 describe('TvshowsService', () => {
   let service: TvshowsService;
@@ -70,21 +71,6 @@ describe('TvshowsService', () => {
     request.flush(mockedTvShows);
   });
   it('should get all tvshows filtered by genre', async () => {
-    const harryPotterMovie = {
-      name: 'Harry Potter',
-      rating: { average: 5.3 },
-      genres: ['Drama', 'Thriller', 'Science-Fiction'],
-    } as TvShow;
-    const flockerMovie = {
-      name: 'Flocker',
-      rating: { average: 9.3 },
-      genres: ['Crime', 'Action'],
-    } as TvShow;
-    const dragonMovie = {
-      name: 'Dragon',
-      rating: { average: 6.3 },
-      genres: ['Drama', 'Action'],
-    } as TvShow;
     mockedTvShows = [harryPotterMovie, flockerMovie, dragonMovie] as TvShow[];
     service.init().subscribe();
 
