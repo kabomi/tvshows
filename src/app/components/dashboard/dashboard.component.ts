@@ -7,19 +7,17 @@ import { IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  imports: [IonGrid, IonRow, IonCol, CommonModule]
+  imports: [IonGrid, IonRow, IonCol, CommonModule],
 })
-export class DashboardComponent  implements OnInit {
-
-  constructor() { }
+export class DashboardComponent implements OnInit {
+  constructor() {}
 
   @Input()
-  genres: string[] = [];
+  genres: string[] = ['drama', 'fantasy', 'comedy'];
 
-  trackByFn: (id: number, name: string) => string = (id, name) => name
+  trackByFn: (id: number, name: string) => string = (id, name) => name;
 
   ngOnInit() {
-    console.log("Dashboard onInit");
+    return;
   }
-
 }

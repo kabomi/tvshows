@@ -12,7 +12,7 @@ describe('DashboardComponent', () => {
   @Component({
     imports: [DashboardComponent],
     standalone: true,
-    template: `<app-dashboard [genres]="genres"></app-dashboard>`,
+    template: `<app-dashboard [genres]="genres" [showsLimit]="showsLimit"></app-dashboard>`,
   })
   class TestHostComponent {
     @Input()
@@ -32,15 +32,15 @@ describe('DashboardComponent', () => {
     const element = fixture.debugElement.query(By.css('.dashboard-grid')).nativeElement as HTMLElement;
     expect(element).toBeTruthy();
   });
-  it("should contain a row per genre", () => {
-    const genres = ['suspense','comedy','fantasy','drama'];
+  it('should contain a row per genre', () => {
+    const genres = ['suspense', 'comedy', 'fantasy', 'drama'];
     const hostFixture = TestBed.createComponent(TestHostComponent);
     const hostComponent = hostFixture.componentInstance;
     hostComponent.genres = genres;
     hostFixture.detectChanges();
-    const elements = hostFixture.debugElement.queryAll(By.css('.dashboard-genre-row'));
-    
-    expect(elements).toHaveSize(genres.length);
+    const rowElements = hostFixture.debugElement.queryAll(By.css('.dashboard-genre-row'));
+
+    expect(rowElements).toHaveSize(genres.length);
   });
 
   

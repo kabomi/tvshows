@@ -22,7 +22,9 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     {
       provide: TvShowOptions,
-      useValue: new TvShowOptions('https://api.tvmaze.com',{ getAllShows: '/shows'}),
+      useValue: new TvShowOptions('https://api.tvmaze.com', {
+        getAllShows: '/shows',
+      }),
     },
     importProvidersFrom(HttpClientModule),
     {

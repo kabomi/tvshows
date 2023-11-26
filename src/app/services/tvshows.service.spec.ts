@@ -8,17 +8,21 @@ import { TvShow } from './tvshows.model';
 describe('TvshowsService', () => {
   let service: TvshowsService;
   let httpClient: HttpTestingController;
-  let mockedTvShows: TvShow[]
+  let mockedTvShows: TvShow[];
   let apiOptions: TvShowOptions;
 
   beforeEach(() => {
-    apiOptions = new TvShowOptions('https://api.tvshows.com', { getAllShows: '/shows'});
+    apiOptions = new TvShowOptions('https://api.tvshows.com', {
+      getAllShows: '/shows',
+    });
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{
-        provide: TvShowOptions,
-        useValue: apiOptions
-      }]
+      providers: [
+        {
+          provide: TvShowOptions,
+          useValue: apiOptions,
+        },
+      ],
     });
     service = TestBed.inject(TvshowsService);
     httpClient = TestBed.inject(HttpTestingController);
@@ -50,9 +54,12 @@ describe('TvshowsService', () => {
     const request = httpClient.expectOne(apiOptions.allShowsUrl);
 
     request.flush(mockedTvShows);
-  })
+  });
   it('should fetch all tvshows ordered by rating', async () => {
-    mockedTvShows = [{ name: 'Harry Potter', rating: { average: 5.3} }, { name: 'Flocker', rating: { average: 9.3} }] as TvShow[];
+    mockedTvShows = [
+      { name: 'Harry Potter', rating: { average: 5.3 } },
+      { name: 'Flocker', rating: { average: 9.3 } },
+    ] as TvShow[];
     service.init().subscribe();
     service.tvShows$.subscribe((tvShows) => {
       expect(tvShows[0].name).toBe('Flocker');
@@ -61,12 +68,24 @@ describe('TvshowsService', () => {
     const request = httpClient.expectOne(apiOptions.allShowsUrl);
 
     request.flush(mockedTvShows);
-  })
+  });
   it('should get all tvshows filtered by genre', async () => {
-    const harryPotterMovie = { name: 'Harry Potter', rating: { average: 5.3}, genres: ['Drama', 'Thriller', 'Science-Fiction'] } as TvShow;
-    const flockerMovie = { name: 'Flocker', rating: { average: 9.3}, genres: ['Crime', 'Action'] } as TvShow;
-    const dragonMovie = { name: 'Dragon', rating: { average: 6.3}, genres: ['Drama', 'Action'] } as TvShow;
-    mockedTvShows = [harryPotterMovie, flockerMovie,  dragonMovie] as TvShow[];
+    const harryPotterMovie = {
+      name: 'Harry Potter',
+      rating: { average: 5.3 },
+      genres: ['Drama', 'Thriller', 'Science-Fiction'],
+    } as TvShow;
+    const flockerMovie = {
+      name: 'Flocker',
+      rating: { average: 9.3 },
+      genres: ['Crime', 'Action'],
+    } as TvShow;
+    const dragonMovie = {
+      name: 'Dragon',
+      rating: { average: 6.3 },
+      genres: ['Drama', 'Action'],
+    } as TvShow;
+    mockedTvShows = [harryPotterMovie, flockerMovie, dragonMovie] as TvShow[];
     service.init().subscribe();
 
     service.getShowsByGenre('Drama').subscribe((tvShows) => {
@@ -74,7 +93,7 @@ describe('TvshowsService', () => {
       expect(tvShows).toContain(dragonMovie);
       expect(tvShows).not.toContain(flockerMovie);
     });
-  
+
     let request = httpClient.expectOne(apiOptions.allShowsUrl);
     request.flush(mockedTvShows);
 
@@ -93,5 +112,5 @@ describe('TvshowsService', () => {
     });
 
     httpClient.expectNone(apiOptions.allShowsUrl);
-  })
+  });
 });

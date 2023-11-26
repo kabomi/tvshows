@@ -17,13 +17,13 @@ describe('HomePage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('contains a header title', () => {
     const element = fixture.debugElement.query(By.css('.home-header-title')).nativeElement as HTMLElement;
-    expect(element.innerText).toContain("Movies");
+    expect(element.innerText).toContain('Movies');
   });
   it('contains a dashboard', () => {
     const dashboard = fixture.debugElement.query(By.directive(DashboardComponent));
     expect(dashboard).toBeTruthy();
-  })
+  });
 });
