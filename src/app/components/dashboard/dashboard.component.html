@@ -1,3 +1,11 @@
-<p>
-  dashboard works!
-</p>
+<ion-grid class="dashboard-grid">
+  <ion-row class="dashboard-genre-row" 
+    *ngFor="let genre of genres; trackBy: trackByFn">
+    <ion-col>1</ion-col>
+    <ion-col>2</ion-col>
+    <ion-col>3</ion-col>
+    <ion-col>4</ion-col>
+    <ion-col>5</ion-col>
+    <ion-col>6</ion-col>
+  </ion-row>
+</ion-grid>
