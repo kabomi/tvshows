@@ -14,4 +14,10 @@ export class TvshowsService {
     return this.httpClient.get<TvShow[]>('https://api.tvmaze.com/shows')
       .pipe(switchMap((shows) => of(shows.sort((a, b) => b.rating.average - a.rating.average))));
   }
+
+  getShowsByGenre(genre: string): Observable<TvShow[]> {
+    return this.getAllShows().pipe(
+      switchMap((shows) => 
+        of(shows.filter((show) => show.genres.includes(genre)))));
+  }
 }
