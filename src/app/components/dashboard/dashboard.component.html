@@ -1,11 +1,9 @@
 <ion-grid class="dashboard-grid">
   <ion-row class="dashboard-genre-row" 
     *ngFor="let genre of genres; trackBy: trackByFn">
-    <ion-col>1</ion-col>
-    <ion-col>2</ion-col>
-    <ion-col>3</ion-col>
-    <ion-col>4</ion-col>
-    <ion-col>5</ion-col>
-    <ion-col>6</ion-col>
+    <ion-col class="dashboard-genre-column" 
+    *ngFor="let show of tvShowsByGenre.get(genre)  | slice:0:showsPerGenreLimit; trackBy: trackByShowFn">
+     {{show.name}}
+    </ion-col>
   </ion-row>
 </ion-grid>
