@@ -1,0 +1,23 @@
+.dashboard-genre-row, .scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
+
+  .dashboard-genre-column, .card {
+    flex: 0 0 auto;
+  }
+}
+
+.show-summary {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.dashboard-tvshow-action {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

@@ -30,6 +30,11 @@ describe('DashboardComponent', () => {
     showsPerGenreLimit = 5;
   }
 
+  afterEach(() => {
+    fixture.destroy();
+    TestBed.resetTestingModule();
+  });
+
   beforeEach(waitForAsync(() => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;

@@ -1,9 +1,24 @@
 <ion-grid class="dashboard-grid">
-  <ion-row class="dashboard-genre-row" 
+  <section  
     *ngFor="let genre of genres; trackBy: trackByFn">
+    <ion-title style="text-align: left;">{{genre}}</ion-title>
+    <ion-row class="dashboard-genre-row">
     <ion-col class="dashboard-genre-column" 
     *ngFor="let show of tvShowsByGenre.get(genre)  | slice:0:showsPerGenreLimit; trackBy: trackByShowFn">
-     {{show.name}}
+     <ion-card>
+      <ion-img alt="Silhouette of mountains" src="{{show.image}}" />
+      <ion-card-header>
+        <ion-card-title style="align-self: flex-start;">{{show.name}}</ion-card-title>
+        <ion-card-subtitle style="align-self: flex-start;">
+          <ion-badge>{{show.rating}}</ion-badge>
+        </ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content [innerHTML]="show.summary" class="show-summary">
+      </ion-card-content>
+      <ion-button class="dashboard-tvshow-action">Call to action</ion-button>
+    </ion-card>
     </ion-col>
   </ion-row>
+  </section>
 </ion-grid>

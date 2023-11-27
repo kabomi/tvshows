@@ -16,6 +16,11 @@ describe('HomePage', () => {
   let apiOptions: TvShowOptions;
   let tvShowsService: TvshowsService;
 
+  afterEach(() => {
+    fixture.destroy();
+    TestBed.resetTestingModule();
+  });
+
   beforeEach(async () => {
     apiOptions = new TvShowOptions('https://api.tvshows.com', {
       getAllShows: '/shows',
@@ -57,7 +62,8 @@ describe('HomePage', () => {
   });
   it('fetches the tvShows by Genre and pass them down to the dashboard', () => {
     const fetchedGenres = ['Drama', 'Thriller', 'Science-Fiction', 'Crime', 'Action'];
-    const dashboardComponent = fixture.debugElement.query(By.directive(DashboardComponent)).componentInstance as DashboardComponent;
+    const dashboardComponent = fixture.debugElement.query(By.directive(DashboardComponent))
+      .componentInstance as DashboardComponent;
     expect(dashboardComponent.tvShowsByGenre).toHaveSize(fetchedGenres.length);
     expect(dashboardComponent.showsPerGenreLimit).toBe(apiOptions.showsPerGenreLimit);
   });
