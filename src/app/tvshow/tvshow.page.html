@@ -13,4 +13,8 @@
       <ion-title size="large">tvshow</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <section id="container">
+    <app-tvshow-item *ngIf="show;" [show]="show"></app-tvshow-item>
+  </section>
 </ion-content>
