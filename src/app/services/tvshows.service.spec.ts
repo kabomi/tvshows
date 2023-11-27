@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { TvshowsService } from './tvshows.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TvShow } from './tvshows.model';
+import { TvShow, covertTvShowResponse } from './tvshows.model';
 import { dragonMovie, flockerMovie, harryPotterMovie } from './tvshows.mocks';
 
 describe('TvshowsService', () => {
@@ -11,6 +11,10 @@ describe('TvshowsService', () => {
   let httpClient: HttpTestingController;
   let mockedTvShows: TvShow[];
   let apiOptions: TvShowOptions;
+
+  afterEach(() => {
+    TestBed.resetTestingModule();
+  });
 
   beforeEach(() => {
     apiOptions = new TvShowOptions('https://api.tvshows.com', {
@@ -34,7 +38,7 @@ describe('TvshowsService', () => {
   });
 
   it('should fetch all tvshows on init', async () => {
-    mockedTvShows = [{ name: 'Harry Potter' }] as TvShow[];
+    mockedTvShows = [harryPotterMovie] as TvShow[];
     service.init().subscribe((tvShows) => {
       expect(tvShows).toHaveSize(1);
     });
@@ -45,7 +49,7 @@ describe('TvshowsService', () => {
   });
 
   it('should fetch all tvshows after init without firing another request', async () => {
-    mockedTvShows = [{ name: 'Harry Potter' }] as TvShow[];
+    mockedTvShows = [harryPotterMovie] as TvShow[];
     service.init().subscribe();
 
     service.tvShows$.subscribe((tvShows) => {
@@ -57,10 +61,7 @@ describe('TvshowsService', () => {
     request.flush(mockedTvShows);
   });
   it('should fetch all tvshows ordered by rating', async () => {
-    mockedTvShows = [
-      { name: 'Harry Potter', rating: { average: 5.3 } },
-      { name: 'Flocker', rating: { average: 9.3 } },
-    ] as TvShow[];
+    mockedTvShows = [harryPotterMovie, flockerMovie] as TvShow[];
     service.init().subscribe();
     service.tvShows$.subscribe((tvShows) => {
       expect(tvShows[0].name).toBe('Flocker');
@@ -75,26 +76,26 @@ describe('TvshowsService', () => {
     service.init().subscribe();
 
     service.getShowsByGenre('Drama').subscribe((tvShows) => {
-      expect(tvShows).toContain(harryPotterMovie);
-      expect(tvShows).toContain(dragonMovie);
-      expect(tvShows).not.toContain(flockerMovie);
+      expect(tvShows).toContain(covertTvShowResponse(harryPotterMovie));
+      expect(tvShows).toContain(covertTvShowResponse(dragonMovie));
+      expect(tvShows).not.toContain(covertTvShowResponse(flockerMovie));
     });
 
     let request = httpClient.expectOne(apiOptions.allShowsUrl);
     request.flush(mockedTvShows);
 
     service.getShowsByGenre('Action').subscribe((tvShows) => {
-      expect(tvShows).toContain(flockerMovie);
-      expect(tvShows).toContain(dragonMovie);
-      expect(tvShows).not.toContain(harryPotterMovie);
+      expect(tvShows).toContain(covertTvShowResponse(flockerMovie));
+      expect(tvShows).toContain(covertTvShowResponse(dragonMovie));
+      expect(tvShows).not.toContain(covertTvShowResponse(harryPotterMovie));
     });
 
     httpClient.expectNone(apiOptions.allShowsUrl);
 
     service.getShowsByGenre('Thriller').subscribe((tvShows) => {
-      expect(tvShows).toContain(harryPotterMovie);
-      expect(tvShows).not.toContain(flockerMovie);
-      expect(tvShows).not.toContain(dragonMovie);
+      expect(tvShows).toContain(covertTvShowResponse(harryPotterMovie));
+      expect(tvShows).not.toContain(covertTvShowResponse(flockerMovie));
+      expect(tvShows).not.toContain(covertTvShowResponse(dragonMovie));
     });
 
     httpClient.expectNone(apiOptions.allShowsUrl);

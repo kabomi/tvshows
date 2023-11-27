@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TvShow } from './tvshows.model';
+import { TvShow, TvShowResponse, covertTvShowResponse } from './tvshows.model';
 import { Observable, ReplaySubject, of, switchMap, tap } from 'rxjs';
 import { TvShowOptions } from './tvshows.options';
 
@@ -34,8 +34,10 @@ export class TvshowsService {
 
   private getAllShows(): Observable<TvShow[]> {
     return this.httpClient
-      .get<TvShow[]>(this.tvShowsOptions.allShowsUrl)
-      .pipe(switchMap((shows) => of(shows.sort((a, b) => b.rating.average - a.rating.average))));
+      .get<TvShowResponse[]>(this.tvShowsOptions.allShowsUrl)
+      .pipe(
+        switchMap((shows) => of(shows.sort((a, b) => b.rating.average - a.rating.average).map(covertTvShowResponse))),
+      );
   }
 
   private updateTvShows(tvShows: TvShow[]) {
