@@ -10,4 +10,13 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'tvshow',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'tvshow/:id',
+    loadComponent: () => import('./tvshow/tvshow.page').then((m) => m.TvshowPage),
+  },
 ];
