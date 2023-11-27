@@ -100,4 +100,14 @@ describe('TvshowsService', () => {
 
     httpClient.expectNone(apiOptions.allShowsUrl);
   });
+  it('should fetch tvshow details', async () => {
+    const showId = harryPotterMovie.id.toString();
+    service.getShowDetails(showId).subscribe((tvShow) => {
+      expect(tvShow).toEqual(covertTvShowResponse(harryPotterMovie));
+    });
+
+    const request = httpClient.expectOne(apiOptions.getDetailsUrl(showId));
+
+    request.flush(harryPotterMovie);
+  });
 });

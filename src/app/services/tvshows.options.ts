@@ -17,4 +17,8 @@ export class TvShowOptions implements Options {
   get allShowsUrl() {
     return `${this.apiUrl}${this.urls.getAllShows}`;
   }
+
+  getDetailsUrl(showId: string) {
+    return `${this.allShowsUrl}/${showId}`;
+  }
 }

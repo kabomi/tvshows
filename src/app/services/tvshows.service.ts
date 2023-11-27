@@ -24,6 +24,12 @@ export class TvshowsService {
     return this.tvShows$.pipe(switchMap((shows) => of(shows.filter((show) => show.genres.includes(genre)))));
   }
 
+  public getShowDetails(showId: string): Observable<TvShow> {
+    return this.httpClient
+      .get<TvShowResponse>(this.tvShowsOptions.getDetailsUrl(showId))
+      .pipe(switchMap((show) => of(covertTvShowResponse(show))));
+  }
+
   public init(): Observable<TvShow[]> {
     return this.getAllShows().pipe(
       tap((tvShows) => {
