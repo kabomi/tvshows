@@ -23,8 +23,18 @@ export type TvShow = TvShowResponse & {
   rating: number;
 };
 
-export function covertTvShowResponse(response: TvShowResponse): TvShow {
-  const tvShow = Object.assign({}, response, { image: response.image.medium, rating: response.rating.average });
+export function covertTvShowResponse(response: TvShowResponse): TvShow;
+export function covertTvShowResponse(response: TvShowResponse[]): TvShow[];
 
+export function covertTvShowResponse(response: TvShowResponse | TvShowResponse[]): TvShow | TvShow[] {
+  if (Array.isArray(response)) {
+    return response.map(_covertTvShowResponse);
+  } else {
+    return _covertTvShowResponse(response);
+  }
+}
+
+function _covertTvShowResponse(response: TvShowResponse) {
+  const tvShow = Object.assign({}, response, { image: response.image.medium, rating: response.rating.average });
   return tvShow;
 }

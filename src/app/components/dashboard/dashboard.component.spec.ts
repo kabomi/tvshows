@@ -3,8 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { By } from '@angular/platform-browser';
 import { Component, Input } from '@angular/core';
-import { TvShow } from 'src/app/services/tvshows.model';
+import { TvShow, covertTvShowResponse } from 'src/app/services/tvshows.model';
 import { dragonMovie, flockerMovie, harryPotterMovie, lastActionMovie } from 'src/app/services/tvshows.mocks';
+import { TvshowItemComponent } from '../tvshow-item/tvshow-item.component';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -62,11 +63,11 @@ describe('DashboardComponent', () => {
   it('should list the shows of each genre limiting its number to showsLimitPerGenre value', () => {
     const genres = ['Drama', 'Action'];
     const tvShowsByGenre = new Map<string, TvShow[]>();
-    tvShowsByGenre.set('Drama', [harryPotterMovie, dragonMovie]);
-    tvShowsByGenre.set('Thriller', [harryPotterMovie]);
-    tvShowsByGenre.set('Science-Fiction', [harryPotterMovie]);
-    tvShowsByGenre.set('Crime', [flockerMovie]);
-    tvShowsByGenre.set('Action', [flockerMovie, dragonMovie, lastActionMovie]);
+    tvShowsByGenre.set('Drama', covertTvShowResponse([harryPotterMovie, dragonMovie]));
+    tvShowsByGenre.set('Thriller', covertTvShowResponse([harryPotterMovie]));
+    tvShowsByGenre.set('Science-Fiction', covertTvShowResponse([harryPotterMovie]));
+    tvShowsByGenre.set('Crime', covertTvShowResponse([flockerMovie]));
+    tvShowsByGenre.set('Action', covertTvShowResponse([flockerMovie, dragonMovie, lastActionMovie]));
     const hostFixture = TestBed.createComponent(TestHostComponent);
     const hostComponent = hostFixture.componentInstance;
 
@@ -77,12 +78,12 @@ describe('DashboardComponent', () => {
 
     const rowElements = hostFixture.debugElement.queryAll(By.css('.dashboard-genre-row'));
 
-    // Drama columns
-    const columnsFirstRowElements = rowElements[0].queryAll(By.css('.dashboard-genre-column'));
-    expect(columnsFirstRowElements).toHaveSize(hostComponent.showsPerGenreLimit);
+    // Drama tvShows
+    const tvShowsFirstRowElements = rowElements[0].queryAll(By.directive(TvshowItemComponent));
+    expect(tvShowsFirstRowElements).toHaveSize(hostComponent.showsPerGenreLimit);
 
-    // Action columns
-    const columnsSecondRowElements = rowElements[1].queryAll(By.css('.dashboard-genre-column'));
-    expect(columnsSecondRowElements).toHaveSize(hostComponent.showsPerGenreLimit);
+    // Action tvShows
+    const tvShowsSecondRowElements = rowElements[1].queryAll(By.directive(TvshowItemComponent));
+    expect(tvShowsSecondRowElements).toHaveSize(hostComponent.showsPerGenreLimit);
   });
 });

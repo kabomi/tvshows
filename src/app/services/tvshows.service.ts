@@ -35,9 +35,7 @@ export class TvshowsService {
   private getAllShows(): Observable<TvShow[]> {
     return this.httpClient
       .get<TvShowResponse[]>(this.tvShowsOptions.allShowsUrl)
-      .pipe(
-        switchMap((shows) => of(shows.sort((a, b) => b.rating.average - a.rating.average).map(covertTvShowResponse))),
-      );
+      .pipe(switchMap((shows) => of(covertTvShowResponse(shows.sort((a, b) => b.rating.average - a.rating.average)))));
   }
 
   private updateTvShows(tvShows: TvShow[]) {

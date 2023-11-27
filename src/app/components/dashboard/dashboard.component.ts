@@ -1,41 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonCard,
-  IonButton,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonBadge,
-  IonTitle,
-  IonImg,
-} from '@ionic/angular/standalone';
+import { IonGrid, IonRow, IonCol, IonTitle } from '@ionic/angular/standalone';
 import { TvShow } from 'src/app/services/tvshows.model';
+import { TvshowItemComponent } from '../tvshow-item/tvshow-item.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  imports: [
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonButton,
-    CommonModule,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonTitle,
-    IonBadge,
-    IonImg,
-  ],
+  imports: [IonGrid, IonRow, IonCol, CommonModule, IonTitle, TvshowItemComponent],
 })
 export class DashboardComponent implements OnInit {
   constructor() {}
