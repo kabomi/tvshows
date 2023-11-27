@@ -19,6 +19,7 @@ export type TvShowResponse = {
 };
 
 export type TvShow = TvShowResponse & {
+  id: string;
   image: string;
   rating: number;
 };
@@ -35,6 +36,10 @@ export function covertTvShowResponse(response: TvShowResponse | TvShowResponse[]
 }
 
 function _covertTvShowResponse(response: TvShowResponse) {
-  const tvShow = Object.assign({}, response, { image: response.image.medium, rating: response.rating.average });
+  const tvShow = Object.assign({}, response, {
+    id: response.id.toString(),
+    image: response.image.medium,
+    rating: response.rating.average,
+  });
   return tvShow;
 }

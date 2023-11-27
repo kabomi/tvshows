@@ -11,7 +11,9 @@ export class TvshowDetailNavigationDirective {
 
   constructor(private router: Router) {}
 
-  @HostListener('click', ['$event']) onClick() {
+  @HostListener('click', ['$event']) onClick($event: Event) {
+    // $event.stopPropagation();
+    // $event.preventDefault();
     if (this.tvShowId) {
       this.router.navigate(['tvshow', this.tvShowId]);
     }

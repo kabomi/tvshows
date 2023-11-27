@@ -12,6 +12,7 @@ import {
   IonImg,
 } from '@ionic/angular/standalone';
 import { TvShow } from 'src/app/services/tvshows.model';
+import { TvshowDetailNavigationDirective } from '../tvshow-detail-navigation.directive';
 
 @Component({
   selector: 'app-tvshow-item',
@@ -29,6 +30,7 @@ import { TvShow } from 'src/app/services/tvshows.model';
     IonTitle,
     IonBadge,
     IonImg,
+    TvshowDetailNavigationDirective,
   ],
 })
 export class TvshowItemComponent implements OnInit {
