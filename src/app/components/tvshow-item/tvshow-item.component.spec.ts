@@ -13,7 +13,7 @@ describe('TvshowItemComponent', () => {
   let component: TvshowItemComponent;
   let fixture: ComponentFixture<TvshowItemComponent>;
   let router: Router;
-  
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [TvshowItemComponent, Router],
