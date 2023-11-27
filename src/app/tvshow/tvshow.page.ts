@@ -1,10 +1,12 @@
-import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
+import { TvshowsService } from './../services/tvshows.service';
+import { AfterContentInit, Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, LoadingController } from '@ionic/angular';
-import { TvShow, covertTvShowResponse } from '../services/tvshows.model';
+import { TvShow } from '../services/tvshows.model';
 import { TvshowItemComponent } from '../components/tvshow-item/tvshow-item.component';
-import { harryPotterMovie } from '../services/tvshows.mocks';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tvshow',
@@ -13,21 +15,42 @@ import { harryPotterMovie } from '../services/tvshows.mocks';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, TvshowItemComponent],
 })
-export class TvshowPage implements AfterContentInit {
-  @Input()
+export class TvshowPage implements AfterContentInit, OnDestroy {
   show: TvShow | undefined = undefined;
 
-  constructor(private loadingCtrl: LoadingController) {}
+  // @Input()
+  // id!: string;
+
+  private loading: HTMLIonLoadingElement | undefined;
+  private _showDetailsSub!: Subscription;
+
+  constructor(
+    private loadingCtrl: LoadingController,
+    private tvShowsService: TvshowsService,
+    private route: ActivatedRoute,
+  ) {
+    const showId = this.route.snapshot.paramMap.get('id');
+    if (!showId) return;
+
+    this._showDetailsSub = this.tvShowsService.getShowDetails(showId).subscribe((show) => {
+      this.show = show;
+      this.loading?.dismiss();
+    });
+  }
 
   async showLoading() {
-    const loading = await this.loadingCtrl.create({
+    this.loading = await this.loadingCtrl.create({
       message: 'Loading Movie...',
     });
 
-    loading.present();
+    this.loading.present();
   }
 
   ngAfterContentInit() {
     this.showLoading();
+  }
+
+  ngOnDestroy() {
+    this._showDetailsSub?.unsubscribe();
   }
 }

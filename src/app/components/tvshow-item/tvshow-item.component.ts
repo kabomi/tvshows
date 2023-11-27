@@ -37,6 +37,9 @@ export class TvshowItemComponent implements OnInit {
   @Input()
   show: TvShow | undefined = undefined;
 
+  @Input()
+  callToAction = true;
+
   constructor() {}
 
   ngOnInit() {

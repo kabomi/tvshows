@@ -51,6 +51,13 @@ describe('TvshowItemComponent', () => {
     const button = fixture.debugElement.query(By.directive(IonButton)).componentInstance as IonButton;
     expect(button).toBeTruthy();
   });
+  it('should be able to hide call to action button', () => {
+    component.callToAction = false;
+    fixture.detectChanges();
+
+    const button = fixture.debugElement.query(By.directive(IonButton))?.componentInstance as IonButton;
+    expect(button).toBeFalsy();
+  });
   it('navigates to tvshow detail page on call to action', () => {
     const button = fixture.debugElement.query(By.directive(IonButton));
     button.triggerEventHandler('click', {});

@@ -9,5 +9,5 @@
 
   <ion-card-content [innerHTML]="show?.summary" class="show-summary">
   </ion-card-content>
-  <ion-button class="tvshow-action" [appTvshowDetailNavigation]="show?.id">Show More</ion-button>
+  <ion-button *ngIf="callToAction" class="tvshow-action" [appTvshowDetailNavigation]="show?.id">Show More</ion-button>
 </ion-card>

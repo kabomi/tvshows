@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>tvshow</ion-title>
+    <ion-title>{{show ? show.name : "Loading..."}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button default-href="/"></ion-back-button>
     </ion-buttons>
@@ -10,11 +10,11 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">tvshow</ion-title>
+      <ion-title size="large">{{show ? show.name : "Loading..."}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <section id="container">
-    <app-tvshow-item *ngIf="show;" [show]="show"></app-tvshow-item>
+    <app-tvshow-item [callToAction]="false" *ngIf="show;" [show]="show"></app-tvshow-item>
   </section>
 </ion-content>
