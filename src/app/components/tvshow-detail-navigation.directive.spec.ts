@@ -14,6 +14,7 @@ describe('TvshowDetailNavigationDirective', () => {
 
   afterEach(async () => {
     fixture.destroy();
+    TestBed.resetTestingModule();
   });
 
   beforeEach(async () => {

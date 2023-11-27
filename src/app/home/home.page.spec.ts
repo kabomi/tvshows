@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HomePage } from './home.page';
 import { By } from '@angular/platform-browser';
@@ -21,7 +21,7 @@ describe('HomePage', () => {
     TestBed.resetTestingModule();
   });
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
     apiOptions = new TvShowOptions('https://api.tvshows.com', {
       getAllShows: '/shows',
     });
@@ -41,7 +41,7 @@ describe('HomePage', () => {
     fixture = TestBed.createComponent(HomePage);
     component = fixture.componentInstance;
     fixture.autoDetectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

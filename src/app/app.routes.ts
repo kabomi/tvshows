@@ -19,4 +19,8 @@ export const routes: Routes = [
     path: 'tvshow/:id',
     loadComponent: () => import('./tvshow/tvshow.page').then((m) => m.TvshowPage),
   },
+  {
+    path: '**',
+    loadComponent: () => import('./not-found/not-found.page').then((m) => m.NotFoundPage),
+  },
 ];
