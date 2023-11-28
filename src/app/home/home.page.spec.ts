@@ -51,6 +51,13 @@ describe('HomePage', () => {
     const element = fixture.debugElement.query(By.css('.home-header-title')).nativeElement as HTMLElement;
     expect(element.innerText).toContain('Movies');
   });
+  it('contains a search bar', () => {
+    expect(component.searchBar).toBeTruthy();
+  });
+  //TODO:
+  //searches by tvshow name and returns a list
+  //clears the list
+  //jumps to the detail list on pressing on an item
   it('contains a dashboard', () => {
     const dashboardComponent = fixture.debugElement.query(By.directive(DashboardComponent)).componentInstance;
     expect(dashboardComponent).toBeTruthy();
