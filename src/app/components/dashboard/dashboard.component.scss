@@ -1,18 +1,19 @@
-.dashboard-genre-row, .scrolling-wrapper {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
+// .dashboard-genre-row, .scrolling-wrapper {
+//   display: flex;
+//   flex-wrap: nowrap;
+//   overflow-x: auto;
+//   overflow-y: hidden;
+//   -webkit-overflow-scrolling: touch;
+//   // &::-webkit-scrollbar {
+//   //   display: none;
+//   // }
 
-  .dashboard-genre-column, .card {
-    flex: 0 0 auto;
-  }
-}
+//   .dashboard-genre-column, .card {
+//     flex: 0 0 auto;
+//   }
+// }
 
-.show-summary {
-  height: 200px;
-  overflow-y: auto;
+.genre-title {
+  font-size: 1.5rem;
+
 }

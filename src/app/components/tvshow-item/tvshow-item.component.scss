@@ -2,3 +2,9 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+.show-summary {
+  max-height: 200px;
+  text-overflow: ellipsis;
+  overflow-y: auto;
+}

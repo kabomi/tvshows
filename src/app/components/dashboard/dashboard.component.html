@@ -2,11 +2,11 @@
   <section  
     *ngFor="let genre of genres; trackBy: trackByFn">
     <ion-title style="text-align: left;">{{genre}}</ion-title>
-    <ion-row class="dashboard-genre-row">
-    <ion-col class="dashboard-genre-column" 
+    <swiper-container class="dashboard-genre-row">
+      <swiper-slide class="dashboard-genre-column" sizeLg="2"
     *ngFor="let show of tvShowsByGenre.get(genre)  | slice:0:showsPerGenreLimit; trackBy: trackByShowFn">
      <app-tvshow-item [show]="show"></app-tvshow-item>
-    </ion-col>
-  </ion-row>
+    </swiper-slide>
+  </swiper-container>
   </section>
 </ion-grid>
