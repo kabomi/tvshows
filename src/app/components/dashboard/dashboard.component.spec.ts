@@ -86,4 +86,5 @@ describe('DashboardComponent', () => {
     const tvShowsSecondRowElements = rowElements[1].queryAll(By.directive(TvshowItemComponent));
     expect(tvShowsSecondRowElements).toHaveSize(hostComponent.showsPerGenreLimit);
   });
+  // TODO: Test Swiper responsive
 });

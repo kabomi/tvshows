@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TvshowPage } from './tvshow.page';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterState } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { harryPotterMovie } from '../services/tvshows.mocks';
 import { covertTvShowResponse } from '../services/tvshows.model';
 import { By } from '@angular/platform-browser';
@@ -16,7 +16,6 @@ describe('TvshowPage', () => {
   let fixture: ComponentFixture<TvshowPage>;
   let tvShowsService: TvshowsService;
   let apiOptions: TvShowOptions;
-  let routerState: RouterState;
 
   afterEach(async () => {
     fixture.destroy();
