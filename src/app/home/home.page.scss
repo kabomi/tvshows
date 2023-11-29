@@ -19,3 +19,8 @@
 #container a {
   text-decoration: none;
 }
+
+.home-search-list {
+  max-height: 30vh;
+  overflow: auto;
+}

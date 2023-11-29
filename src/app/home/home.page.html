@@ -6,7 +6,7 @@
   </ion-toolbar>
   <ion-toolbar>
     <ion-searchbar [debounce]="500"></ion-searchbar>
-    <ion-list>
+    <ion-list class="home-search-list">
       <ion-item *ngFor="let result of items$ | async">
         <ion-label [appTvshowDetailNavigation]="result?.id">{{ result.name }}</ion-label>
       </ion-item>
@@ -21,7 +21,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <section id="container">
+  <section id="container" class="scrollable-y--hide">
     <app-dashboard [genres]="genres" [tvShowsByGenre]="tvShowsByGenre" [showsPerGenreLimit]="showsPerGenreLimit"></app-dashboard>
   </section>
 </ion-content>

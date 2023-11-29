@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit } from '@angular/core';
-import { IonGrid, IonRow, IonCol, IonTitle } from '@ionic/angular/standalone';
+import { IonGrid, IonRow, IonCol, IonTitle, IonList, IonItem } from '@ionic/angular/standalone';
 import { TvShow } from 'src/app/services/tvshows.model';
 import { TvshowItemComponent } from '../tvshow-item/tvshow-item.component';
 import { register } from 'swiper/element/bundle';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { distinctUntilChanged } from 'rxjs';
 
 register();
@@ -15,7 +16,7 @@ register();
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [IonGrid, IonRow, IonCol, CommonModule, IonTitle, TvshowItemComponent],
+  imports: [IonGrid, IonRow, IonCol, IonList, IonItem, CommonModule, IonTitle, TvshowItemComponent, ScrollingModule],
 })
 export class DashboardComponent implements OnInit {
   Breakpoints = Breakpoints;
