@@ -1,5 +1,6 @@
 <ion-card class="scrollable-y">
-  <ion-img alt="{{'Picture of the film titled: ' + show?.name}}" src="{{show?.image}}" />
+  <ion-skeleton-text *ngIf="!imgLoaded" :animated="animated" class="skeleton-image"></ion-skeleton-text>
+    <ion-img alt="{{'Picture of the film titled: ' + show?.name}}" src="{{show?.image}}" (ionImgDidLoad)="imgLoaded = true" />
   <ion-card-header>
     <ion-card-title style="align-self: flex-start;">{{show?.name}}</ion-card-title>
     <ion-card-subtitle style="align-self: flex-start;">

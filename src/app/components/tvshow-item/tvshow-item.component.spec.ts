@@ -25,6 +25,7 @@ describe('TvshowItemComponent', () => {
     fixture = TestBed.createComponent(TvshowItemComponent);
     component = fixture.componentInstance;
     component.show = covertTvShowResponse(harryPotterMovie);
+    component.imgLoaded = true;
     fixture.detectChanges();
   }));
 
@@ -32,34 +33,34 @@ describe('TvshowItemComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should contain an image', () => {
-    const image = fixture.debugElement.query(By.directive(IonImg)).componentInstance as IonImg;
+    const image = fixture.debugElement.query(By.css('ion-img')).componentInstance as IonImg;
     expect(image.src).toBe(component.show?.image);
   });
   it('should contain a badge with the rating', () => {
-    const badgeElement = fixture.debugElement.query(By.directive(IonBadge)).nativeElement as HTMLElement;
+    const badgeElement = fixture.debugElement.query(By.css('ion-badge')).nativeElement as HTMLElement;
     expect(Number(badgeElement.textContent)).toEqual(component.show?.rating!);
   });
   it('should contain a title', () => {
-    const titleElement = fixture.debugElement.query(By.directive(IonCardTitle)).nativeElement as HTMLElement;
+    const titleElement = fixture.debugElement.query(By.css('ion-card-title')).nativeElement as HTMLElement;
     expect(titleElement.textContent).toBe(component.show?.name!);
   });
   it('should contain a summary', () => {
-    const contentElement = fixture.debugElement.query(By.directive(IonCardContent)).nativeElement as HTMLElement;
+    const contentElement = fixture.debugElement.query(By.css('ion-card-content')).nativeElement as HTMLElement;
     expect(contentElement.innerHTML).toBe(component.show?.summary!);
   });
   it('should contain a call to action button', () => {
-    const button = fixture.debugElement.query(By.directive(IonButton)).componentInstance as IonButton;
+    const button = fixture.debugElement.query(By.css('ion-button')).componentInstance as IonButton;
     expect(button).toBeTruthy();
   });
   it('should be able to hide call to action button', () => {
     component.callToAction = false;
     fixture.detectChanges();
 
-    const button = fixture.debugElement.query(By.directive(IonButton))?.componentInstance as IonButton;
+    const button = fixture.debugElement.query(By.css('ion-button'))?.componentInstance as IonButton;
     expect(button).toBeFalsy();
   });
   it('navigates to tvshow detail page on call to action', () => {
-    const button = fixture.debugElement.query(By.directive(IonButton));
+    const button = fixture.debugElement.query(By.css('ion-button'));
     button.triggerEventHandler('click', {});
 
     fixture.detectChanges();

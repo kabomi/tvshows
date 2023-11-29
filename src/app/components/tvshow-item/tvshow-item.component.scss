@@ -8,3 +8,8 @@
   text-overflow: ellipsis;
   overflow-y: auto;
 }
+.skeleton-image {
+  height: calc(100% - 260px);
+  width: 100%;
+  margin: 0;
+}
