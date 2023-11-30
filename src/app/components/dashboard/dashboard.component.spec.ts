@@ -7,6 +7,7 @@ import { TvShow, covertTvShowResponse } from 'src/app/services/tvshows.model';
 import { dragonMovie, flockerMovie, harryPotterMovie, lastActionMovie } from 'src/app/services/tvshows.mocks';
 import { TvshowItemComponent } from '../tvshow-item/tvshow-item.component';
 import { animationFrameScheduler } from 'rxjs';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -66,9 +67,9 @@ describe('DashboardComponent', () => {
     const element = fixture.debugElement.query(By.css('.dashboard')).nativeElement as HTMLElement;
     expect(element).toBeTruthy();
   });
-  it('should contain a row per genre', fakeAsync(() => {
+  it('should contain a row per genre limiting genre by infiniteScrollItemsLimit value', fakeAsync(() => {
     const genres = ['suspense', 'comedy', 'fantasy', 'drama'];
-    const hostFixture = TestBed.createComponent(TestHostComponent);
+    const hostFixture = TestBed.createComponent(DashboardComponent);
     const hostComponent = hostFixture.componentInstance;
     hostComponent.genres = genres;
     hostFixture.detectChanges();
@@ -76,7 +77,7 @@ describe('DashboardComponent', () => {
 
     const rowElements = hostFixture.debugElement.queryAll(By.css('.dashboard-genre-row'));
 
-    expect(rowElements).toHaveSize(genres.length);
+    expect(rowElements).toHaveSize(hostComponent.infiniteScrollItemsLimit);
   }));
 
   it('should list the shows of each genre limiting its number to showsLimitPerGenre value', fakeAsync(() => {

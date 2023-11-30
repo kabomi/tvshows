@@ -1,18 +1,20 @@
-<section class="dashboard">
-  <cdk-virtual-scroll-viewport class="ion-content-scroll-host" [itemSize]="genres.length" minBufferPx="900" maxBufferPx="1350">
+<ion-content [fullscreen]="true" [scrollY]="false" class="dashboard">
+  <cdk-virtual-scroll-viewport class="ion-content-scroll-host" [itemSize]="1020" minBufferPx="900" maxBufferPx="1350">
 
-      <section class="dashboard-genre-row" 
-        *cdkVirtualFor="let genre of genres; trackBy: trackByFn">
-            <ion-title style="text-align: left;">{{genre}}</ion-title>
-            <ion-content class="dashboard-genre-content">
-              <swiper-container [attr.slides-per-view]="slidesPerView" class="dashboard-genre-swiper">
-                <swiper-slide class="dashboard-genre-column"
-                  *ngFor="let show of tvShowsByGenre.get(genre)  | slice:0:showsPerGenreLimit; trackBy: trackByShowFn">
-                  <app-tvshow-item [show]="show"></app-tvshow-item>
-              </swiper-slide>
-              </swiper-container>
-            </ion-content>
-      </section>
-
+    <section class="dashboard-genre-row" 
+      *cdkVirtualFor="let genre of renderedGenres; trackBy: trackByFn">
+          <ion-title style="text-align: left;">{{genre}}</ion-title>
+          <ion-content class="dashboard-genre-content">
+            <swiper-container [attr.slides-per-view]="slidesPerView" class="dashboard-genre-swiper" #swiperContainer>
+              <swiper-slide class="dashboard-genre-column"
+                *ngFor="let show of tvShowsByGenre.get(genre)  | slice:0:showsPerGenreLimit; trackBy: trackByShowFn">
+                <app-tvshow-item [show]="show"></app-tvshow-item>
+            </swiper-slide>
+            </swiper-container>
+          </ion-content>
+    </section>
+    <ion-infinite-scroll threshold="2040px" (ionInfinite)="onIonInfinite($event);">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </cdk-virtual-scroll-viewport>
-</section>
+</ion-content>

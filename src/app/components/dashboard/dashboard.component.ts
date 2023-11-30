@@ -7,6 +7,7 @@ import { register } from 'swiper/element/bundle';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { distinctUntilChanged } from 'rxjs';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 register();
 
@@ -21,9 +22,11 @@ register();
 export class DashboardComponent implements OnInit {
   Breakpoints = Breakpoints;
   slidesPerView: number = 3;
+  infiniteScrollItemsLimit: number = 2;
 
   @Input()
   genres: string[] = [];
+  renderedGenres: string[] = [];
 
   @Input()
   tvShowsByGenre = new Map<string, TvShow[]>();
@@ -33,16 +36,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
-  trackByFn: (id: number, name: string) => string = (id, name) => name;
-  trackByShowFn: (id: number, tvShow: TvShow) => string = (id, tvShow) => tvShow.name;
-
   readonly breakpoint$ = this.breakpointObserver
     .observe([Breakpoints.Large, Breakpoints.Medium, Breakpoints.Small, '(max-width: 599px)'])
     .pipe(distinctUntilChanged());
-
-  ngOnInit(): void {
-    this.breakpoint$.subscribe(() => this.breakpointChanged());
-  }
 
   private breakpointChanged() {
     if (this.breakpointObserver.isMatched(Breakpoints.Large)) {
@@ -54,5 +50,24 @@ export class DashboardComponent implements OnInit {
     } else if (this.breakpointObserver.isMatched('(max-width: 599px)')) {
       this.slidesPerView = 1;
     }
+  }
+
+  trackByFn: (id: number, name: string) => string = (id, name) => name;
+  trackByShowFn: (id: number, tvShow: TvShow) => string = (id, tvShow) => tvShow.name;
+
+  onIonInfinite(ev: InfiniteScrollCustomEvent) {
+    if (this.renderedGenres.length < this.genres.length) {
+      this.renderedGenres = this.renderedGenres.concat(
+        this.genres.slice(this.renderedGenres.length, this.renderedGenres.length + this.infiniteScrollItemsLimit),
+      );
+    }
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    });
+  }
+
+  ngOnInit(): void {
+    this.breakpoint$.subscribe(() => this.breakpointChanged());
+    this.renderedGenres = this.genres.slice(0, this.infiniteScrollItemsLimit);
   }
 }
