@@ -55,11 +55,15 @@ Feel free to configure your IDE prettier/eslint plugins to don't have the need t
 
 This command will generate the app production files, ready to be deployed.
 
-## Contributing
+## Contributing and Known issues
 
 To contribute to this repository feel free to create a PR.
 - There are some tests missing.
 - There are plenty of features that we could possibly add.
+  - Adding skeleton for the images, virtual-scroll and infinite-scroll has improve performance (les items rendered; blocking time to a minimum). But some bugs appeared:
+    - Scrolling on simulated desktop devices (Chrome) stop working (on Desktop works well)
+    - On bigger screens (when the swiper creates 2 or mores slides) the number of slides are lost after infinite-scroll triggers several times. 
+      - After some research this could be caused by the swiper being destroyed and created again, but we don't want to go down the rabbit hole, it might exist a better solution.
 
 ---
 
