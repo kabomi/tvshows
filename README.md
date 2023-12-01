@@ -28,8 +28,6 @@ After starting the application you can open it ain your browser at [http://http:
 ### `ionic serve`
 
 Runs the app in the development mode.<br />
-This means it will point to a local instance of the activities-service-be on [http://localhost:8080](http://localhost:8080).
-This does not apply to the pdf-service-be. You can change this by editing the corresponding `.env` file in the env directory.
 
 Ionic will watch for changes and do hot-reload when necessary.
 
